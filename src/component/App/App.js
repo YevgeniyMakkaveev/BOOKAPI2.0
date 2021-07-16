@@ -1,15 +1,16 @@
 import React from 'react';
 import './App.css';
 import Header from '../Header'
-import Pannel from '../Pannel'
+import Panel from '../Panel'
 import Card from '../Results/Card';
-import reducer from '../../service/reduser'
+import reducer from '../../service/reduser';
 import { createStore} from 'redux';
 import { Provider } from 'react-redux';
 import BookCard from '../Results/result'
-
+import Modal from '../Modal';
 
 const store = createStore(reducer)
+console.log(store.getState())
 
 
 const App=()=> {
@@ -17,10 +18,12 @@ const App=()=> {
     <div className="App">
     <Provider store={store}>
     <Header/>
-    <Pannel/>
-    <button onClick={()=>{console.log(store.getState())}}> State</button>
+    <Panel/>
+    <button onClick={()=>{console.log(store.getState())}}> СТОР</button>
+
     <BookCard/>
-    <Card/>
+    <Modal/>
+    
 
     </Provider>
     </div>

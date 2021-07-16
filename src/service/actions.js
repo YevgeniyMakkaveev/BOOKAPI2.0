@@ -10,12 +10,13 @@ const bookClear=()=>{
  }
 }
 
-const getTearm=(tearm, field, priority)=>{
+const getTearm = (tearm, field, priority) => {
  return{
   type: 'GET_TEARM',
   tearm: tearm,
   field: field,
-  priority: priority
+  priority: priority,
+  
  }
 }
 
@@ -25,6 +26,14 @@ const clearTearm=()=>{
  }
 }
 
+const getId=(id)=>{
+ return{
+  type:'GET_ID',
+  selfId: id
+ }
+}
+
+
 export {
- bookLoad, bookClear, getTearm, clearTearm
+ bookLoad, bookClear, getTearm, clearTearm, getId
 }
