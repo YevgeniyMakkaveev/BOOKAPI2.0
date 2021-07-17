@@ -19,37 +19,40 @@ getApi=new GetApi()
 
 
 
-componentDidUpdate(prevProp){
-  if (this.props.tearm !== prevProp.tearm) {
-  this.getInit(prevProp)
- } else if(this.state.needUpdate){
-  this.updateBook(prevProp)
- }}
+  componentDidUpdate(prevProp) {
+    if (this.props.tearm !== prevProp.tearm) {
+      this.getInit(prevProp)
+    } else if (this.state.needUpdate) {
+      this.updateBook(prevProp)
+    }
+  }
 
- updateBook=(prevProp)=>{
-const{tearm,field, priority} =this.props
-const {index, bookList} = this.state
-this.getApi.getNormalBooks(tearm, field, priority, index).then((data) => {
-  console.log(data)
-  let newData
-   if(prevProp.tearm===this.props.tearm){newData=bookList.concat(data.items)}else{newData=data.items}
-  this.setState({
-  bookList: newData,
-  isLoading: false,
-  totalItems: data.totalItems,
-  needUpdate: false})
-  
- })}
+  updateBook = (prevProp) => {
+    const { tearm, field, priority } = this.props
+    const { index, bookList } = this.state
+    this.getApi.getNormalBooks(tearm, field, priority, index).then((data) => {
+      console.log(data)
+      let newData
+      if (prevProp.tearm === this.props.tearm) { newData = bookList.concat(data.items) } else { newData = data.items }
+      this.setState({
+        bookList: newData,
+        isLoading: false,
+        totalItems: data.totalItems,
+        needUpdate: false
+      })
+    })
+  }
 
 
- onGetMore=()=> {
-  const oldIndex=this.state.index
-  const newIndex=+oldIndex+30
-  this.setState({
-   index: newIndex,
-   isLoading: true,
-   needUpdate: true
-  })}
+  onGetMore = () => {
+    const oldIndex = this.state.index
+    const newIndex = +oldIndex + 30
+    this.setState({
+      index: newIndex,
+      isLoading: true,
+      needUpdate: true
+    })
+  }
 
 getInit=(prevProp)=>{
   this.setState({
@@ -59,17 +62,19 @@ getInit=(prevProp)=>{
 this.updateBook(prevProp)
 }
 
-drawPicture(data){
- let idInner = this.state.index
- if(!data){return null} else{
- return (data.map((item)=>{
-  idInner++
-  const selfLink = item.selfLink
-  const {title, publisher,publishedDate,description, authors, categories} = item.volumeInfo
-  const {thumbnail} = item.volumeInfo.imageLinks? item.volumeInfo.imageLinks: "Не найденно"
-  console.log(title, publisher, publishedDate, description, thumbnail)
-   return <CardCustom key={idInner} title={title} publisher={publisher} publishedDate={publishedDate} description={description} thumbnail={thumbnail} authors={authors} categories={categories} selfLink={selfLink}  />
- }))}}
+  drawPicture(data) {
+    let idInner = this.state.index
+    if (!data) { return null } else {
+      return (data.map((item) => {
+        idInner++
+        const selfLink = item.selfLink
+        const { title, publisher, publishedDate, description, authors, categories } = item.volumeInfo
+        const { thumbnail } = item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks : "Не найденно"
+        console.log(title, publisher, publishedDate, description, thumbnail)
+        return <CardCustom key={idInner} title={title} publisher={publisher} publishedDate={publishedDate} description={description} thumbnail={thumbnail} authors={authors} categories={categories} selfLink={selfLink} />
+      }))
+    }
+  }
 
  render(){
   const {bookList, isLoading,totalItems}=this.state
