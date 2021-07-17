@@ -33,7 +33,12 @@ const getId=(id)=>{
  }
 }
 
+const clearId=()=>{
+ return{
+  type: 'CLEAR_ID'
+ }
+}
 
 export {
- bookLoad, bookClear, getTearm, clearTearm, getId
+ bookLoad, bookClear, getTearm, clearTearm, getId, clearId
 }

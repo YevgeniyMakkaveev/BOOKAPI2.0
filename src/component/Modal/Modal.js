@@ -5,34 +5,42 @@ import * as actions from '../../service/actions'
 import {connect} from 'react-redux'
 import GetApi from '../../service/getApi'
 import { Modal,  Row, Col } from "react-bootstrap"
+import { bindActionCreators} from 'redux';
+import CustomSpinner from '../spinner'
 
 
 class ModalWind extends Component{
 state={
 bookData: [],
-isOpen: true
+isOpen: true,
+isLoading: false
 }
 
  getApi=new GetApi()
 
  componentDidUpdate(prevProp){
   if (this.props.imgLink !== prevProp.imgLink) {
+    this.setState({
+      isLoading: true
+    })
    this.updateIndo()
   }}
 
 updateIndo=()=>{
 const id = this.props.imgLink
+if(id){
 this.getApi.getSingleBook(id).then((data) => {
  this.setState({
   bookData: data.volumeInfo,
-  isOpen: true
+  isOpen: true,
+  isLoading: false
  })
-})
-console.log(this.state.bookData)
+})}
+
 }
 
 checkInfo=(data)=>{
- if(!data){return "No Data"}else return data
+ if(!data){return "Не указаны"}else return data
 }
 
 getImg=(img)=>{
@@ -41,17 +49,20 @@ getImg=(img)=>{
 
   openModal = () => this.setState({ isOpen: true });
 
-  closeModal = () => this.setState({
+  closeModal = () => {this.setState({
     isOpen: false,
     bookData: []
-  });
+  })
+this.props.clearId()}
 
 
 render(){
+
  if (!this.props.imgLink){return null}
+ else if(this.state.isLoading){return <div className="spin-load"> <CustomSpinner/></div> }
  const {title, description, categories, authors,publisher,publishedDate} = this.state.bookData
  const bigImg = this.state.bookData.imageLinks ? this.getImg(this.state.bookData.imageLinks):deafaultImg
- const allAuthors=authors? authors.toString(): "Ошибка"
+ const allAuthors=authors? authors.toString(): "Авторы не указаны"
 
 
  
@@ -93,7 +104,12 @@ const mapStateToProps = (res) =>{
  return{
   imgLink: res.modalReducer.selfId
  }
- 
-}
+ }
+const mapDispatchToProps =(dispatch) =>{
+  const {clearId} = bindActionCreators(actions, dispatch)
+  return{
+   clearId,
+  }
+  }
 
-export default connect(mapStateToProps)(ModalWind)
+export default connect(mapStateToProps, mapDispatchToProps)(ModalWind)

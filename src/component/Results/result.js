@@ -4,17 +4,16 @@ import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
 import CardCustom from './Card';
 import CustomSpinner from '../spinner';
-import * as actions from '../../service/actions'
 import './result.css'
 
 class BookCard extends Component{
    
     state = {
      bookList: [],
-     hasContent: false,
      index: 0,
      totalItems: null,
-     needUpdate: true
+     isLoading: true,
+     needUpdate: false
     }
     
 getApi=new GetApi()
@@ -22,9 +21,8 @@ getApi=new GetApi()
 
 
 componentDidUpdate(prevProp){
- if(!this.props.tearm){this.setState({ bookList: [],index:0, hasContent: false})}
- else if (this.props.tearm !== prevProp.tearm) {
-  this.updateBook(prevProp)
+  if (this.props.tearm !== prevProp.tearm) {
+  this.getInit(prevProp)
  } else if(this.state.needUpdate){
   this.updateBook(prevProp)
  }}
@@ -38,10 +36,10 @@ this.getApi.getNormalBooks(tearm, field, priority, index).then((data) => {
    if(prevProp.tearm===this.props.tearm){newData=bookList.concat(data.items)}else{newData=data.items}
   this.setState({
   bookList: newData,
+  isLoading: false,
   totalItems: data.totalItems,
-  needUpdate: false,
-  hasContent: true})
-  console.log(this.state.bookList.length)
+  needUpdate: false})
+  
  })}
 
 
@@ -54,7 +52,13 @@ this.getApi.getNormalBooks(tearm, field, priority, index).then((data) => {
    needUpdate: true
   })}
 
-
+getInit=(prevProp)=>{
+  this.setState({
+    index: 0,
+    isLoading: true
+  })
+this.updateBook(prevProp)
+}
 
 drawPicture(data){
  let idInner = this.state.index
@@ -68,12 +72,12 @@ drawPicture(data){
  }))}
 
  render(){
-  const {bookList, needUpdate, hasContent,totalItems}=this.state
+  const {bookList, isLoading,totalItems}=this.state
 
   if (!this.props.tearm){return null} 
-  else if (needUpdate) {
+  else if (isLoading) {
     console.log(`Лоадинг`)
-    return <CustomSpinner/>
+    return <div className="spin-load"><CustomSpinner/></div>
   }
  
   const data= this.drawPicture(bookList)

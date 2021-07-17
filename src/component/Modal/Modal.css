@@ -27,3 +27,12 @@ background: #ddbea9;
 .desc-text{
 font-size: calc(0.6em + 0.6vw);
 }
+.spin-load{
+    position: fixed;
+     top: 50%;
+     left: 50%;
+    vertical-align: middle;
+    align-content: center;
+    width: auto;
+    z-index: 9999;
+}

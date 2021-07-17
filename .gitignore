@@ -21,3 +21,8 @@
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
+/src/component/Panel/pannel.js
+/src/component/Pannel/pannel.css
+/src/component/Pannel/pannel.js
+/src/component/Results/Card/img/book-template.png
+/src/component/Results/Card/img/book.jpg

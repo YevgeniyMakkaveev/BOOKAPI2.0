@@ -1,9 +1,7 @@
 import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actions from '../../service/actions'
-import {
-  bindActionCreators
-} from 'redux';
+import { bindActionCreators} from 'redux';
 import './panel.css'
 
  class Panel extends Component {
@@ -58,8 +56,8 @@ return (
  </div>
  </div>
 <div className="input-group">
-  <div class="container">
-    <div class="row justify-content-center align-items-center">
+  <div className="container">
+    <div className="row justify-content-center align-items-center">
  <select className="form-select pannel-colour" onChange={this.onFieldChange}>
 <option value="all">all </option>
 <option value="art">art</option>

@@ -34,6 +34,10 @@ const stanImg={
     return{
       selfId: action.selfId
     }
+    case 'CLEAR_ID':
+      return{
+        selfId: null
+      }
     default: return state
    }
  }

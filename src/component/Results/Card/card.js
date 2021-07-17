@@ -21,12 +21,11 @@ checkImg(img){
 
 
 render(){
-   
 const selfLink = this.props.selfLink
 const {title, publisher, publishedDate, description}=this.checkData(this.props)
 const smallText = description ? description: "Нет описания"
-const authors= this.props.authors? this.props.authors.toString():"No Data"
-const categories = this.props.categories? this.props.categories.toString():"No Data"
+const authors= this.props.authors? this.props.authors.toString():"Авторы не указаны"
+const categories = this.props.categories? this.props.categories.toString():"Категории не указаны"
 const thumbnail = this.checkImg(this.props.thumbnail)
 
 
@@ -44,7 +43,7 @@ return(
         </div>
         <div className="row g-0">
         <p className="card-text"><small className="text-muted">Издатель: {publisher},{publishedDate}</small></p>
-        <div class="overview">
+        <div className="overview">
         {smallText}
     </div>
       </div>

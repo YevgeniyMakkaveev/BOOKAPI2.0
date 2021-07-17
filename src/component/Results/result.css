@@ -2,3 +2,13 @@
 .component-nest{
 margin: 0 2rem 2rem;
 }
+
+.spin-load {
+ position: fixed;
+ top: 50%;
+ left: 50%;
+ vertical-align: middle;
+ align-content: center;
+ width: auto;
+ z-index: 9999;
+}
