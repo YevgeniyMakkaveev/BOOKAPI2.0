@@ -20,6 +20,12 @@ background: #ddbea9;
 .table-text{
   font-size: calc(0.65em + 0.65vw)  
 }
+.list-text{
+  list-style-type: none;
+  display: flex;
+  flex-direction: column;
+  justify-self: stretch;
+}
 .bigger-stuff {
   font-weight: bold;
   font-size: calc(0.8em + 0.8vw);

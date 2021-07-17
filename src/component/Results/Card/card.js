@@ -3,7 +3,7 @@ import deafaultImg from '../../img/book-template.png'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
 import * as actions from '../../../service/actions';
-import './card.css'
+import './Card.css'
 
 class CardCustom extends Component{
 
@@ -40,31 +40,25 @@ return(
          <p className="card-text"><small className="text-muted">{categories}</small></p>
         <h5 className="card-title">{title}</h5>
         <h5 className="card-title">{authors}</h5>
-        </div>
-        <div className="row g-0">
-        <p className="card-text"><small className="text-muted">Издатель: {publisher},{publishedDate}</small></p>
-        <div className="overview">
-        {smallText}
-    </div>
       </div>
-    </div>
-  </div>
+        <div className="row g-0">
+         <p className="card-text"><small className="text-muted">Издатель: {publisher},{publishedDate}</small></p>
+            <div className="overview">
+            {smallText}
+            </div>
+         </div>
+      </div>
+   </div>
 </div>
 
-)
-}
-}
+)}}
 
 
 
 
 const mapDispatchToProps = (dispatch) => {
-   const {
-      getId
-   } = bindActionCreators(actions, dispatch)
-   return {
-      getId: (id) => {
-         getId(id)
+   const {getId} = bindActionCreators(actions, dispatch)
+   return { getId: (id) => {getId(id)
       }
    }
 }

@@ -4,7 +4,7 @@ import Panel from '../Panel'
 import reducer from '../../service/reduser';
 import { createStore} from 'redux';
 import { Provider } from 'react-redux';
-import BookCard from '../Results/result'
+import BookCard from '../Results'
 import ModalWind from '../Modal';
 import ErrorBoundry from '../ErrorBound'
 
@@ -14,15 +14,14 @@ console.log(store.getState())
 
 const App=()=> {
   return (
-    <div className="App">
-      
-      <ErrorBoundry>
-    <Provider store={store}>
-      <Panel/>
-     <BookCard/>
-    <ModalWind/>
-     </Provider>
-    </ErrorBoundry>
+    <div className="App"> 
+   <ErrorBoundry>
+      <Provider store={store}>
+       <Panel/>
+       <BookCard/>
+       <ModalWind/>
+      </Provider>
+  </ErrorBoundry>
     </div>
   );
 }

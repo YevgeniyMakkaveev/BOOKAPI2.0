@@ -68,36 +68,35 @@ render(){
  
  return(
   <Modal show={this.state.isOpen} onHide={this.closeModal} onClick={this.closeModal} dialogClassName="my-modal">
-  <Modal.Header>  
-  <Modal.Title ><p className="table-text">{this.checkInfo(categories)}</p></Modal.Title>
-    
-  </Modal.Header>
+    <Modal.Header>  
+      <Modal.Title ><p className="table-text">{this.checkInfo(categories)}</p></Modal.Title> 
+    </Modal.Header>
   <Row md={4} >
-  <Col md>
-  <img className="modal-img" src={bigImg} alt="тест"/>
-  </Col>
-  <Col>
-    <h2 className="bigger-stuff"> {title} </h2>
-  </Col>
-  <Col>
-  <ul className="table-text">
-    <li>
-     {allAuthors} 
-    </li>
-      {this.checkInfo(publisher)}
-    <li>
-    {this.checkInfo(publishedDate)}
-    </li>
-  </ul>
-  </Col>
+    <Col md>
+      <img className="modal-img" src={bigImg} alt="тест"/>
+    </Col>
+    <Col>
+      <h2 className="bigger-stuff"> {title} </h2>
+    </Col>
+    <Col>
+      <ul className="list-text">
+        <li>
+          {allAuthors} 
+        </li>
+        <li>
+          {this.checkInfo(publisher)}
+        </li>
+        <li>
+          {this.checkInfo(publishedDate)}
+        </li>
+      </ul>
+    </Col>
   </Row>
-  <Modal.Body>
-    <p className="desc-text">{description}</p></Modal.Body>
+    <Modal.Body>
+      <p className="desc-text">{description}</p></Modal.Body>
 </Modal>
 
- )
-}
-}
+ )}}
 
 
 const mapStateToProps = (res) =>{
@@ -107,9 +106,6 @@ const mapStateToProps = (res) =>{
  }
 const mapDispatchToProps =(dispatch) =>{
   const {clearId} = bindActionCreators(actions, dispatch)
-  return{
-   clearId,
-  }
-  }
+  return{clearId,}}
 
 export default connect(mapStateToProps, mapDispatchToProps)(ModalWind)

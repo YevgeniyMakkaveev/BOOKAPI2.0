@@ -1,2 +1,2 @@
-import CardCustom from './card'
+import CardCustom from './Card'
 export default CardCustom

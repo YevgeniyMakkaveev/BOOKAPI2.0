@@ -1,10 +1,9 @@
 import React,{Component} from 'react'
 import GetApi from '../../service/getApi'
 import {connect} from 'react-redux'
-import { bindActionCreators } from 'redux';
 import CardCustom from './Card';
 import CustomSpinner from '../spinner';
-import './result.css'
+import './Result.css'
 
 class BookCard extends Component{
    
@@ -62,6 +61,7 @@ this.updateBook(prevProp)
 
 drawPicture(data){
  let idInner = this.state.index
+ if(!data){return null} else{
  return (data.map((item)=>{
   idInner++
   const selfLink = item.selfLink
@@ -69,7 +69,7 @@ drawPicture(data){
   const {thumbnail} = item.volumeInfo.imageLinks? item.volumeInfo.imageLinks: "Не найденно"
   console.log(title, publisher, publishedDate, description, thumbnail)
    return <CardCustom key={idInner} title={title} publisher={publisher} publishedDate={publishedDate} description={description} thumbnail={thumbnail} authors={authors} categories={categories} selfLink={selfLink}  />
- }))}
+ }))}}
 
  render(){
   const {bookList, isLoading,totalItems}=this.state
@@ -85,14 +85,14 @@ drawPicture(data){
   
   return(
     <div className="component-nest">
-      <p className="mb-3">Всего найденно {totalItems} </p>
-   < div className = "row row-cols-1 row-cols-md-4 g-4 mt-2" >
-    {data}
-   </div>
-       <div className="d-grid gap-2">
-   <button className="btn btn-danger"  onClick={this.onGetMore}> Load More</button>
-   </div>
-   </div>
+      <p className="mb-3">Всего найдено {totalItems} </p>
+        <div className = "row row-cols-1 row-cols-md-4 g-4 mt-2" >
+          {data}
+        </div>
+        <div className="d-grid gap-2">
+          <button className="btn btn-danger"  onClick={this.onGetMore}> Загрузить больше.</button>
+        </div>
+    </div>
   )  
  }
 }
@@ -105,11 +105,5 @@ const mapStateToProps = (res) => {
  }}
 
 
-// const mapDispatchToProps=(dispatch)=>{
-//  const {getId}=bindActionCreators(actions, dispatch)
-//  return{
-//   getId: (id)=>{getId(id)}
-//  }
-// }
 
 export default connect(mapStateToProps)(BookCard)
