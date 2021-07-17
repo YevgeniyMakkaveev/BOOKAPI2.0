@@ -2,7 +2,8 @@ import React,{Component} from 'react'
 import GetApi from '../../service/getApi'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
-import Card from './Card';
+import CardCustom from './Card';
+import CustomSpinner from '../spinner';
 import * as actions from '../../service/actions'
 import './result.css'
 
@@ -12,7 +13,8 @@ class BookCard extends Component{
      bookList: [],
      hasContent: false,
      index: 0,
-     needUpdate: false
+     totalItems: null,
+     needUpdate: true
     }
     
 getApi=new GetApi()
@@ -20,31 +22,35 @@ getApi=new GetApi()
 
 
 componentDidUpdate(prevProp){
- if(this.props.tearm===''){this.setState({ bookList: [],index:0,hasContent: false})}
- else if (this.props.tearm !== prevProp.tearm||this.state.hasContent===false) {
-  this.updateBook()
+ if(!this.props.tearm){this.setState({ bookList: [],index:0, hasContent: false})}
+ else if (this.props.tearm !== prevProp.tearm) {
+  this.updateBook(prevProp)
  } else if(this.state.needUpdate){
-  this.updateBook()
+  this.updateBook(prevProp)
  }}
 
- updateBook=()=>{
+ updateBook=(prevProp)=>{
 const{tearm,field, priority} =this.props
 const {index, bookList} = this.state
 this.getApi.getNormalBooks(tearm, field, priority, index).then((data) => {
   console.log(data)
-  const newData = bookList.concat(data.items)
+  let newData
+   if(prevProp.tearm===this.props.tearm){newData=bookList.concat(data.items)}else{newData=data.items}
   this.setState({
   bookList: newData,
-  hasContent: true,
-  needUpdate: false})
+  totalItems: data.totalItems,
+  needUpdate: false,
+  hasContent: true})
   console.log(this.state.bookList.length)
  })}
+
 
  onGetMore=()=> {
   const oldIndex=this.state.index
   const newIndex=+oldIndex+30
   this.setState({
    index: newIndex,
+   isLoading: true,
    needUpdate: true
   })}
 
@@ -55,23 +61,33 @@ drawPicture(data){
  return (data.map((item)=>{
   idInner++
   const selfLink = item.selfLink
-  const {title, publisher,publishedDate,description, authors} = item.volumeInfo
+  const {title, publisher,publishedDate,description, authors, categories} = item.volumeInfo
   const {thumbnail} = item.volumeInfo.imageLinks? item.volumeInfo.imageLinks: "Не найденно"
   console.log(title, publisher, publishedDate, description, thumbnail)
-   return <Card key={idInner} title={title} publisher={publisher} publishedDate={publishedDate} description={description} thumbnail={thumbnail} authors={authors} selfLink={selfLink}  />
+   return <CardCustom key={idInner} title={title} publisher={publisher} publishedDate={publishedDate} description={description} thumbnail={thumbnail} authors={authors} categories={categories} selfLink={selfLink}  />
  }))}
 
  render(){
-  const {bookList,hasContent}=this.state
+  const {bookList, needUpdate, hasContent,totalItems}=this.state
 
-  if (!hasContent){return <p> тест</p>} 
+  if (!this.props.tearm){return null} 
+  else if (needUpdate) {
+    console.log(`Лоадинг`)
+    return <CustomSpinner/>
+  }
+ 
   const data= this.drawPicture(bookList)
   
   
   return(
-   < div className = "row row-cols-1 row-cols-md-3 g-4 " >
+    <div className="component-nest">
+      <p className="mb-3">Всего найденно {totalItems} </p>
+   < div className = "row row-cols-1 row-cols-md-4 g-4 mt-2" >
     {data}
-   <button onClick={this.onGetMore}> Больше</button>
+   </div>
+       <div className="d-grid gap-2">
+   <button className="btn btn-danger"  onClick={this.onGetMore}> Load More</button>
+   </div>
    </div>
   )  
  }

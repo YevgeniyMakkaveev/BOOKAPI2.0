@@ -1,6 +1,6 @@
 import { combineReducers } from 'redux'
 const initState = {
-tearm: '',
+tearm: null,
 field: "all",
 priority: "relevance",
 }
@@ -9,18 +9,15 @@ const reducerSearch =(state=initState, action)=>{
 switch(action.type){
  case 'BOOK_LOAD':
   return{getId: action.payload}
-  case 'BOOK_CLEAR':
-    return{getId: null}
   case 'GET_TEARM':
    return{
     tearm: action.tearm,
     priority: action.priority,
     field: action.field,
-   
    }
    case 'CLEAR_TEARM':
     return{
-    tearm: '',
+    tearm: null,
     field: "all",
     priority: "relevance",
    

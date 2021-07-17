@@ -2,8 +2,10 @@ import React, { Component } from 'react'
 import deafaultImg from '../../img/book-template.png'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
-import * as actions from '../../../service/actions'
-class Card extends Component{
+import * as actions from '../../../service/actions';
+import './card.css'
+
+class CardCustom extends Component{
 
 toModal = (id) => {
    this.props.getId(id)
@@ -16,11 +18,15 @@ checkImg(img){
    if(!img && img==="Не найденно"){return deafaultImg} else return img
 }
 
+
+
 render(){
    
 const selfLink = this.props.selfLink
 const {title, publisher, publishedDate, description}=this.checkData(this.props)
+const smallText = description ? description: "Нет описания"
 const authors= this.props.authors? this.props.authors.toString():"No Data"
+const categories = this.props.categories? this.props.categories.toString():"No Data"
 const thumbnail = this.checkImg(this.props.thumbnail)
 
 
@@ -32,29 +38,26 @@ return(
     </div>
     <div className="col-md-8">
       <div className="card-body">
+         <p className="card-text"><small className="text-muted">{categories}</small></p>
         <h5 className="card-title">{title}</h5>
         <h5 className="card-title">{authors}</h5>
         </div>
         <div className="row g-0">
         <p className="card-text"><small className="text-muted">Издатель: {publisher},{publishedDate}</small></p>
+        <div class="overview">
+        {smallText}
+    </div>
       </div>
     </div>
   </div>
 </div>
+
 )
 }
 }
 
 
-   // <div className="single-card" onClick={()=>{this.toModal(selfLink)}}>
-   //    <img src={thumbnail} alt=""/>
-   //     <h1>{title}</h1>    
-   //     <div className="overview">
-   //    <h3>{authors}</h3>
-   //    <h3>{publisher},{publishedDate} </h3>
-   //    <p> {description}</p>
-   //  </div>
-   //  </div>
+
 
 const mapDispatchToProps = (dispatch) => {
    const {
@@ -67,4 +70,4 @@ const mapDispatchToProps = (dispatch) => {
    }
 }
 
-export default connect(null, mapDispatchToProps)(Card)
+export default connect(null, mapDispatchToProps)(CardCustom)

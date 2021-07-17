@@ -1,4 +1,31 @@
 .single-card{
  max-width: 500px;
- 
+ overflow: hidden;
+ background-color: transparent;
+ margin:0 1.5rem;
+  box-shadow: 0 5px 10px rgba(54, 47, 3, 0.05),
+  0 15px 40px rgba(0, 0, 0, 0.1);
+  cursor: pointer;
+}
+.img-card {
+ max-height: 130px;
+}
+
+.overview {
+ background-color: #ddbea9;
+ padding: 2rem;
+   position: absolute;
+   left: 0;
+   bottom: 0;
+   right: 0;
+  max-height: 100%;
+  font-size: calc(0.45em + 0.45vw);
+  transform: translateY(101%);
+    overflow: hidden;
+    text-overflow: clip;
+  transition: transform 0.3s ease-in;
+}
+
+.single-card:hover .overview {
+ transform: translateY(0);
 }
