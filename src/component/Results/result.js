@@ -69,7 +69,7 @@ drawPicture(data){
   
   
   return(
-   <div className="to-side"> 
+   < div className = "row row-cols-1 row-cols-md-3 g-4 " >
     {data}
    <button onClick={this.onGetMore}> Больше</button>
    </div>

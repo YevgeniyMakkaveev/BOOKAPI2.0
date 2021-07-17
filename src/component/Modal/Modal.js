@@ -29,7 +29,7 @@ checkInfo=(data)=>{
 }
 
 getImg=(img)=>{
- if (img.thumbnail){return img.thumbnail} else{return deafaultImg}
+ if (img.medium){return img.medium} else{return deafaultImg}
 }
 
 render(){
