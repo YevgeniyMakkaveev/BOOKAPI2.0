@@ -19,7 +19,7 @@ isLoading: false
  getApi=new GetApi()
 
  componentDidUpdate(prevProp){
-  if (this.props.imgLink !== prevProp.imgLink) {
+  if (this.props.bookLink !== prevProp.bookLink) {
     this.setState({
       isLoading: true
     })
@@ -27,7 +27,7 @@ isLoading: false
   }}
 
 updateIndo=()=>{
-const id = this.props.imgLink
+const id = this.props.bookLink
 if(id){
 this.getApi.getSingleBook(id).then((data) => {
  this.setState({
@@ -44,7 +44,7 @@ checkInfo=(data)=>{
 }
 
 getImg=(img)=>{
- if (img.thumbnail){return img.thumbnail} else{return deafaultImg}
+ if (img.medium){return img.thumbnail}else if(img.small){return img.small} else{return deafaultImg}
 }
 
   openModal = () => this.setState({ isOpen: true });
@@ -58,7 +58,7 @@ this.props.clearId()}
 
 render(){
 
- if (!this.props.imgLink){return null}
+ if (!this.props.bookLink){return null}
  else if(this.state.isLoading){return <div className="spin-load"> <CustomSpinner/></div> }
  const {title, description, categories, authors,publisher,publishedDate} = this.state.bookData
  const bigImg = this.state.bookData.imageLinks ? this.getImg(this.state.bookData.imageLinks):deafaultImg
@@ -69,25 +69,25 @@ render(){
  return(
   <Modal show={this.state.isOpen} onHide={this.closeModal} onClick={this.closeModal} dialogClassName="my-modal">
     <Modal.Header>  
-      <Modal.Title ><p className="table-text">{this.checkInfo(categories)}</p></Modal.Title> 
+      <Modal.Title >Категории: {this.checkInfo(categories)}</Modal.Title> 
     </Modal.Header>
   <Row md={4} >
     <Col md>
       <img className="modal-img" src={bigImg} alt="тест"/>
     </Col>
     <Col>
-      <h2 className="bigger-stuff"> {title} </h2>
+      <h2 className="bigger-stuff text-justify"> {title} </h2>
     </Col>
     <Col>
-      <ul className="list-text">
+      <ul className="list-text text-justify">
         <li>
-          {allAuthors} 
+         Авторы: {allAuthors} 
         </li>
         <li>
-          {this.checkInfo(publisher)}
+         Издатель: {this.checkInfo(publisher)}
         </li>
         <li>
-          {this.checkInfo(publishedDate)}
+         Год издания: {this.checkInfo(publishedDate)}
         </li>
       </ul>
     </Col>
@@ -101,7 +101,7 @@ render(){
 
 const mapStateToProps = (res) =>{
  return{
-  imgLink: res.modalReducer.selfId
+  bookLink: res.modalReducer.selfId
  }
  }
 const mapDispatchToProps =(dispatch) =>{

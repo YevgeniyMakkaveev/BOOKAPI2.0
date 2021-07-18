@@ -11,7 +11,7 @@ class BookCard extends Component{
      bookList: [],
      index: 0,
      totalItems: null,
-     isLoading: true,
+     isLoading: false,
      needUpdate: false
     }
     
@@ -31,7 +31,6 @@ getApi=new GetApi()
     const { tearm, field, priority } = this.props
     const { index, bookList } = this.state
     this.getApi.getNormalBooks(tearm, field, priority, index).then((data) => {
-      console.log(data)
       let newData
       if (prevProp.tearm === this.props.tearm) { newData = bookList.concat(data.items) } else { newData = data.items }
       this.setState({
@@ -47,12 +46,13 @@ getApi=new GetApi()
   onGetMore = () => {
     const oldIndex = this.state.index
     const newIndex = +oldIndex + 30
+    if (newIndex<this.state.totalItems){
     this.setState({
       index: newIndex,
       isLoading: true,
       needUpdate: true
     })
-  }
+    }}
 
 getInit=(prevProp)=>{
   this.setState({
@@ -62,7 +62,7 @@ getInit=(prevProp)=>{
 this.updateBook(prevProp)
 }
 
-  drawPicture(data) {
+  renderCard(data) {
     let idInner = this.state.index
     if (!data) { return null } else {
       return (data.map((item) => {
@@ -70,7 +70,6 @@ this.updateBook(prevProp)
         const selfLink = item.selfLink
         const { title, publisher, publishedDate, description, authors, categories } = item.volumeInfo
         const { thumbnail } = item.volumeInfo.imageLinks ? item.volumeInfo.imageLinks : "Не найденно"
-        console.log(title, publisher, publishedDate, description, thumbnail)
         return <CardCustom key={idInner} title={title} publisher={publisher} publishedDate={publishedDate} description={description} thumbnail={thumbnail} authors={authors} categories={categories} selfLink={selfLink} />
       }))
     }
@@ -81,11 +80,11 @@ this.updateBook(prevProp)
 
   if (!this.props.tearm){return null} 
   else if (isLoading) {
-    console.log(`Лоадинг`)
+    
     return <div className="spin-load"><CustomSpinner/></div>
   }
  
-  const data= this.drawPicture(bookList)
+  const data = this.renderCard(bookList)
   
   
   return(

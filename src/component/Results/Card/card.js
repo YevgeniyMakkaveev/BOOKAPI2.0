@@ -12,7 +12,7 @@ toModal = (id) => {
 }
 
 checkData(data){
-   if(!data){return "No Data"}else return data}
+   if(!data){return ''}else return data}
 
 checkImg(img){
    if(!img && img==="Не найденно"){return deafaultImg} else return img
@@ -22,10 +22,10 @@ checkImg(img){
 
 render(){
 const selfLink = this.props.selfLink
-const {title, publisher, publishedDate, description}=this.checkData(this.props)
-const smallText = description ? description: "Нет описания"
-const authors= this.props.authors? this.props.authors.toString():"Авторы не указаны"
-const categories = this.props.categories? this.props.categories.toString():"Категории не указаны"
+const {title, publisher, publishedDate, description}=this.props
+const smallText = description ? description: ''
+const authors = this.props.authors ? this.props.authors.toString() : ''
+const categories = this.props.categories? this.props.categories[0]:''
 const thumbnail = this.checkImg(this.props.thumbnail)
 
 
@@ -38,8 +38,8 @@ return(
     <div className="col-md-8">
       <div className="card-body">
          <p className="card-text"><small className="text-muted">{categories}</small></p>
-        <h5 className="card-title">{title}</h5>
-        <h5 className="card-title">{authors}</h5>
+        <h5 className="card-title">{this.checkData(title)}</h5>
+        <h5 className="card-title">{this.checkData(authors)}</h5>
       </div>
         <div className="row g-0">
          <p className="card-text"><small className="text-muted">Издатель: {publisher},{publishedDate}</small></p>

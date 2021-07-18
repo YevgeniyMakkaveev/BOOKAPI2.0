@@ -9,7 +9,7 @@ import ModalWind from '../Modal';
 import ErrorBoundry from '../ErrorBound'
 
 const store = createStore(reducer)
-console.log(store.getState())
+
 
 
 const App=()=> {
