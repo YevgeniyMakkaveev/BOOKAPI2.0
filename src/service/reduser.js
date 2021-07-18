@@ -7,8 +7,6 @@ priority: "relevance",
 
 const reducerSearch =(state=initState, action)=>{
 switch(action.type){
- case 'BOOK_LOAD':
-  return{getId: action.payload}
   case 'GET_TEARM':
    return{
     tearm: action.tearm,
