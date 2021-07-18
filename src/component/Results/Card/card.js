@@ -3,7 +3,7 @@ import deafaultImg from '../../img/book-template.png'
 import {connect} from 'react-redux'
 import { bindActionCreators } from 'redux';
 import * as actions from '../../../service/actions';
-import './Card.css'
+import './card.css'
 
 class CardCustom extends Component{
 

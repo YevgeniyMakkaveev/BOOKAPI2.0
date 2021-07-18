@@ -3,7 +3,7 @@ import GetApi from '../../service/getApi'
 import {connect} from 'react-redux'
 import CardCustom from './Card';
 import CustomSpinner from '../spinner';
-import './Result.css'
+import './result.css'
 
 class BookCard extends Component{
    

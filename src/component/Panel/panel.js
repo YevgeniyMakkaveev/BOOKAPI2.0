@@ -2,7 +2,7 @@ import React, {Component} from 'react'
 import {connect} from 'react-redux'
 import * as actions from '../../service/actions'
 import { bindActionCreators} from 'redux';
-import './Panel.css'
+import './panel.css'
 
  class Panel extends Component {
   constructor(props){
