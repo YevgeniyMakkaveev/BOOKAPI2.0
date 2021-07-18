@@ -17,8 +17,6 @@ class BookCard extends Component{
     
 getApi=new GetApi()
 
-
-
   componentDidUpdate(prevProp) {
     if (this.props.tearm !== prevProp.tearm) {
       this.getInit(prevProp)
@@ -42,7 +40,6 @@ getApi=new GetApi()
     })
   }
 
-
   onGetMore = () => {
     const oldIndex = this.state.index
     const newIndex = +oldIndex + 30
@@ -59,8 +56,7 @@ getInit=(prevProp)=>{
     index: 0,
     isLoading: true
   })
-this.updateBook(prevProp)
-}
+this.updateBook(prevProp)}
 
   renderCard(data) {
     let idInner = this.state.index
