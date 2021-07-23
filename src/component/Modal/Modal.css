@@ -44,7 +44,10 @@ background: #ddbea9;
  
 }
 .desc-text{
+  border: 0.01em solid black;
 font-size: calc(0.6em + 0.6vw);
+padding: 2em 1em;
+margin: 0 1em;
 }
 .spin-load{
     position: fixed;

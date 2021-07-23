@@ -1,17 +1,38 @@
+
+
 .component-body{
  background: url(../img/book.jpg);
  margin-top: .5rem;
 }
 
 .title{
- font-size: calc(2.5em + 2.5vw);
+ font-size: calc(2.3em + 2.3vw);
   color: brown;
  	font-weight: 700;
  	letter-spacing: .01em;
  	padding: 10rem 0 0 4.5rem;
  	text-shadow: .022em .022em .022em rgb(255, 252, 252)
 }
-.form-select{max-width: 200px;}
+.pannel-serch {
+	background-color: #fefae0;
+	max-height: 5em;
+	min-height: 2.5em;
+	width: 100%;
+	margin-bottom: 1em;
+	font-size: 1em;
+}
+
 .pannel-colour{
 background-color: #fefae0;
+height: 2.3em;
+margin: 0 1em 1em;
+max-width: 17rem;
+font-size: 0.8em;
 }
+#button-addon2{
+padding: 1.3em 2em 1.3em;
+margin-left: 1em;
+font-weight: 700;
+}
+
+

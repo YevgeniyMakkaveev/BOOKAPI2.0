@@ -3,6 +3,7 @@ import GetApi from '../../service/getApi'
 import {connect} from 'react-redux'
 import CardCustom from './Card';
 import CustomSpinner from '../spinner';
+import { Modal } from 'react-bootstrap';
 import './result.css'
 
 class BookCard extends Component{
@@ -12,7 +13,7 @@ class BookCard extends Component{
      index: 0,
      totalItems: null,
      isLoading: false,
-     needUpdate: false
+     needUpdate: false,
     }
     
 getApi=new GetApi()
@@ -35,7 +36,7 @@ getApi=new GetApi()
         bookList: newData,
         isLoading: false,
         totalItems: data.totalItems,
-        needUpdate: false
+        needUpdate: false,
       })
     })
   }
@@ -47,7 +48,7 @@ getApi=new GetApi()
     this.setState({
       index: newIndex,
       isLoading: true,
-      needUpdate: true
+      needUpdate: true,
     })
     }}
 
@@ -72,10 +73,10 @@ this.updateBook(prevProp)}
   }
 
  render(){
-  const {bookList, isLoading,totalItems}=this.state
+  const {bookList, isLoading,totalItems,index}=this.state
 
   if (!this.props.tearm){return null} 
-  else if (isLoading) {
+  else if (isLoading&&index===0) {
     
     return <div className="spin-load"><CustomSpinner/></div>
   }
@@ -88,9 +89,12 @@ this.updateBook(prevProp)}
       <p className="mb-3">Всего найдено {totalItems} </p>
         <div className = "row row-cols-1 row-cols-md-4 g-4 mt-2" >
           {data}
+          <Modal show={isLoading} dialogClassName="my-modal2" centered>
+            <CustomSpinner/>
+          </Modal>
         </div>
         <div className="d-grid gap-2">
-          <button className="btn btn-danger"  onClick={this.onGetMore}> Загрузить больше.</button>
+          <button className="btn btn-danger big-one"  onClick={this.onGetMore}> Загрузить больше.</button>
         </div>
     </div>
   )  

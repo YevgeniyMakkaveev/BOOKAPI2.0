@@ -12,3 +12,11 @@ margin: 0 2rem 2rem;
  width: auto;
  z-index: 9999;
 }
+
+.my-modal2 .modal-content{
+ border-style: none;
+ background-color: transparent;
+}
+.big-one{
+ font-size: 1em;
+}

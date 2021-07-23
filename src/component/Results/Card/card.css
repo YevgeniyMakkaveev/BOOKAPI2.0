@@ -6,6 +6,7 @@
   box-shadow: 0 5px 10px rgba(54, 47, 3, 0.05),
   0 15px 40px rgba(0, 0, 0, 0.1);
   cursor: pointer;
+  font-size: 0.8em;
 }
 .img-card {
  max-height: 130px;
@@ -13,7 +14,7 @@
 
 .overview {
  background-color: #ddbea9;
- padding: 2rem;
+ padding: 2rem 1rem;
    position: absolute;
    left: 0;
    bottom: 0;

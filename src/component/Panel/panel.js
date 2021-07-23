@@ -48,9 +48,9 @@ return (
   <div className="component-body">
     <div className="container">
       <div className="row justify-content-center align-items-center">
-        <h1 className="title text-center" > КНИЖКА API-ШКА 2.0</h1>
+        <h1 className="title text-center" > КНИЖКА API-ШКА </h1>
         <form className="searchPannel" onSubmit={this.onSearchStart}>
-          <input className="pannel-colour form-control-sm ml-3 w-75" placeholder="Начните поиск" aria-label="Recipient's username" aria-describedby="button-addon2" onChange={this.onInput} value={tearm} />
+          <input className="pannel-serch form-control-sm ml-3 w-75" placeholder="Начните поиск"  aria-describedby="button-addon2" onChange={this.onInput} value={tearm} />
           <button className="btn btn-warning" type="button" id="button-addon2" onClick={this.onSearchStart}>ПОИСК </button>
         </form>
       </div>

@@ -63,7 +63,7 @@ render(){
  const {title, description, categories, authors,publisher,publishedDate} = this.state.bookData
  const bigImg = this.state.bookData.imageLinks ? this.getImg(this.state.bookData.imageLinks):deafaultImg
  const allAuthors=authors? authors.toString(): "Авторы не указаны"
-
+const text=description? description: "Нет описания"
 
  
  return(
@@ -93,7 +93,7 @@ render(){
     </Col>
   </Row>
     <Modal.Body>
-      <p className="desc-text">{description}</p></Modal.Body>
+      <div className="desc-text">{text}</div></Modal.Body>
 </Modal>
 
  )}}
